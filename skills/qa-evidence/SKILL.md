@@ -81,9 +81,14 @@ not a factor: a heavy QA phase is still just the next step of the plan.
   part of the page is bad evidence — re-capture until the asserted element is visibly
   in frame (scroll it into view first).
 - **PASS comes from assertions, not eyeballs.** DOM/DB assertions decide; media proves.
-- **No simulated surfaces.** Never rebuild a component as a static preview and
-  screenshot that — it cannot catch integration drift, which is the whole point.
-  The real app serves the real component, always.
+- **No simulated surfaces — and no simulated peers.** Never rebuild a component as a
+  static preview and screenshot that — it cannot catch integration drift, which is the
+  whole point. The real app serves the real component, always. The same rule covers the
+  other side of a seam: a scenario may not simulate a peer (WebSocket server, API,
+  message bus) that the change under test feeds or consumes — if the seam is in the
+  diff, the seam runs real. Proving both halves separately and splicing them with
+  injected frames is not proof the seam works. Any exception is asked of the user
+  BEFORE running, not disclosed in notTested after.
 - **Videos must finalize.** Close the browser context, then read `video.path()` and
   rename. A 0-byte webm is not evidence.
 - **Honesty section.** Every report has "Not tested / caveats". Unverified claims are
