@@ -17,7 +17,11 @@ QA approval is NOT merge authorization.
    live. **If it doesn't exist, bootstrap it** (see Bootstrap below) before doing any QA.
    Never improvise "generic" QA without an adapter.
 
-2. **Preflight — fix, don't route around.** In order:
+2. **Preflight — fix, don't route around.** Preflight is part of the run: do it
+   without asking. That includes reclaiming local resources — stale dev servers
+   holding the ports (verify their branch is merged/abandoned, then kill them),
+   dependency reinstalls after a master merge, starting servers, seeding state.
+   In order:
    - Playwright browsers installed? If not: `playwright install chromium`, or use the
      driver's `msedge` channel fallback (no install needed).
    - App running and reachable at the adapter's URL (worktrees: apply the adapter's
@@ -61,6 +65,15 @@ QA approval is NOT merge authorization.
 
 9. **Hold for approval.** Terminal state: report presented, awaiting the user's verdict.
    Only after approval does the PR open (per project rules). Never merge.
+
+## The one approval point
+
+The finished report (step 9) is the ONLY approval point in this skill. Never ask
+permission to run QA, never checkpoint before starting it, and never offer the user a
+way to skip it ("want me to hand you the branch and you run/skip QA yourself?" is a
+process violation, not deference). The gate exists to stop unproven work from reaching
+a PR — pre-approving the run inverts it into a reason to not produce proof. Cost is
+not a factor: a heavy QA phase is still just the next step of the plan.
 
 ## Evidence-quality rules (each earned from a real incident)
 
