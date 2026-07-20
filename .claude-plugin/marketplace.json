@@ -1,0 +1,18 @@
+{
+  "name": "rohan-skills",
+  "description": "Rohan Richards' Claude Code skills",
+  "owner": {
+    "name": "Rohan Richards"
+  },
+  "plugins": [
+    {
+      "name": "qa-evidence",
+      "description": "Evidence-grade QA: live validation against the real app, HTML evidence reports (screenshots/video or behavioural demos), mock-fidelity checks, user approval before any PR. Bootstraps its own per-project plumbing on first use.",
+      "author": {
+        "name": "Rohan Richards"
+      },
+      "category": "testing",
+      "source": "./"
+    }
+  ]
+}

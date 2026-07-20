@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QA evidence manifest",
+  "type": "object",
+  "required": ["title", "date", "branch", "commit", "scenarios"],
+  "properties": {
+    "title": { "type": "string" },
+    "issue": { "type": "string" },
+    "pr": { "type": "string" },
+    "branch": { "type": "string" },
+    "commit": { "type": "string" },
+    "date": { "type": "string" },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "command", "result"],
+        "properties": {
+          "name": { "type": "string" },
+          "command": { "type": "string" },
+          "result": { "enum": ["pass", "fail"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "form", "status", "assertions"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "form": { "enum": ["ui", "engine"] },
+          "status": { "enum": ["pass", "fail", "partial"] },
+          "steps": { "type": "array", "items": { "type": "string" } },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["desc", "pass"],
+              "properties": {
+                "desc": { "type": "string" },
+                "pass": { "type": "boolean" },
+                "evidence": { "type": "string" }
+              }
+            }
+          },
+          "video": { "type": "string" },
+          "narrative": { "type": "string" },
+          "bugs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["found", "fixed", "reverified"],
+              "properties": {
+                "found": { "type": "string" },
+                "fixed": { "type": "string" },
+                "reverified": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mockFidelity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["view", "mock", "actual", "deviations"],
+        "properties": {
+          "view": { "type": "string" },
+          "mock": { "type": "string" },
+          "actual": { "type": "string" },
+          "deviations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["desc", "kind"],
+              "properties": {
+                "desc": { "type": "string" },
+                "kind": { "enum": ["intentional", "drift"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "notTested": { "type": "array", "items": { "type": "string" } }
+  }
+}
