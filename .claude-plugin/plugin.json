@@ -1,7 +1,7 @@
 {
   "name": "qa-evidence",
   "description": "Evidence-grade QA for Claude Code: before any PR, run live QA against the real app and produce an HTML evidence report (screenshots + video for UI, behavioural demo + gates for engines/APIs) presented for user approval. Bootstraps its own per-project plumbing (Playwright driver, report generator, adapter rule) on first use.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Rohan Richards"
   },
